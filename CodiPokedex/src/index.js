@@ -1,5 +1,5 @@
 var CodiPokedex = CodiPokedex || {};
-CodiPokedex.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, ' ');
+CodiPokedex.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, '');
 
 //States
 CodiPokedex.game.state.add('Boot', CodiPokedex.Boot);
