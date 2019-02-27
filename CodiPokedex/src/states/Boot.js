@@ -20,7 +20,7 @@ CodiPokedex.Boot = {
 		this.scale.maxHeight = 1920;
 
 		//Have the game centered horizontally
-		//this.scale.pageAlignHorizontally = true;    
+		this.scale.pageAlignHorizontally = true;    
 
 		//Scaling options
 		//*All scaling options here*	

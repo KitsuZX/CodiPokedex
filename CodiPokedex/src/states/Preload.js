@@ -1,6 +1,8 @@
 var CodiPokedex = CodiPokedex || {};
 CodiPokedex.Preload = function(){};
 
+var pokemon;
+
 CodiPokedex.Preload = {
 	//Loading the game assets
 	preload: function(){
@@ -12,9 +14,19 @@ CodiPokedex.Preload = {
 		this.load.setPreloadSprite(this.preloadBar);
 
 		//Load game assets	
+		this.load.image('button', 'assets/images/button.png')
+		this.load.image('searcherBG', 'assets/images/searcherBG.png')
+		this.load.image('backButton', 'assets/images/backButton.png')
+		this.load.image('background', 'assets/images/background.png')
+
+		this.game.load.json('pokemon', 'assets/data/pokemon.json');
+
 	},
 
 	create: function(){
+		this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
+		pokemon = this.pokemon;
+
 		this.state.start('Searcher');
 	}
 }

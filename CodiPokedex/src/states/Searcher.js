@@ -1,24 +1,161 @@
 var CodiPokedex = CodiPokedex || {};
-CodiPokedex.Searcher = function(){};
+CodiPokedex.Searcher = function () { };
+
+var pokemonSelected = -1;
 
 //Setting game configuration and loading the assets for the loading screen
 CodiPokedex.Searcher = {
-	preload(){
-		this.game.load.json('pokemon', 'assets/data/pokemon.json');
+
+	create() {
+		this.game.stage.backgroundColor = '#fff';
+
+		var background = this.game.add.sprite(0, 0, 'background');
+		background.width = window.innerWidth;
+		background.height = window.innerHeight;
+		background.fixedToCamera = true;
+
+
+		this.leftSide = this.game.add.sprite(0, 0, 'searcherBG');
+		this.leftSide.width = 350;
+		this.leftSide.height = window.innerHeight;
+		this.leftSide.fixedToCamera = true;
+
+		var text = this.game.add.text((this.leftSide.x + this.leftSide.width / 2), 100, 'Buscador', {font:'bold 40px Arial', fill: '#fff'});
+		text.anchor.setTo(0.5);
+		text.fixedToCamera = true;
+
+		//Crea los rectángulos
+		this.rectangles = [];
+
+		var initX = 400;
+		var initY = 50;
+	
+		var numPokemons = 32;
+		var pokemonsPerRow = 5;
+
+		var buttonWidth = 250;
+		var buttonHeight = 400;
+
+		var xOffset = 50;
+		var yOffset = 50;
+
+		var X = initX;
+		var Y = initY;
+
+		for (var i = 0; i < numPokemons; i++) {
+			var x = X;
+			var y = Y;
+			this.rectangles.push(this.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
+			if ((i + 1) % pokemonsPerRow == 0) {
+				Y += buttonHeight + yOffset;
+				X = initX;
+			} else {
+				X += buttonWidth + xOffset;
+			}
+		}
+
+		//Aumenta los bordes del mundo para que quepan todos los rectángulos
+		this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
+
+		//Parametros del scroll. No tocar.
+		this.dragging = false;
+		this.autoScroll = false;
+		this.timeConstant = 325;
+		this.game.input.onDown.add(this.beginMove, this);
+		this.game.input.onUp.add(this.endMove, this);
+		this.game.input.addMoveCallback(this.moveCamera, this);
 	},
 
-	create(){
+	update: function () {
+		//Scroll 
+		if (this.autoScroll && this.amplitude != 0) {
+			this.elapsed = Date.now() - this.timestamp;
+			var delta = -this.amplitude * Math.exp(-this.elapsed / this.timeConstant);
+			if ((delta > 0.5 || delta < -0.5)) {
+				this.game.camera.y = this.target - delta;
+				this.autoScroll = true;
+			}
+			else {
+				this.autoScroll = false;
+				this.game.camera.y = this.target;
+			}
+		}
+	},
 
-		this.game.stage.backgroundColor = '#852';
-		var style = { font: "65px Arial", fill: "#ffffff", align: "center" };
+	//#region [rgba(0, 50, 30, 0.2)] Movimiento scroll
+	beginMove: function () {
+		this.startY = this.game.input.y;
+		this.dragging = true;
+		this.timestamp = Date.now();
+		this.velocity = this.amplitude = 0;
+	},
 
-		var pokemon = this.game.cache.getJSON('pokemon').pokemon;
+	endMove: function () {
+		this.dragging = false;
+		this.autoScroll = false;
+		if (this.game.input.activePointer.withinGame && (this.velocity > 10 || this.velocity < -10)) {
+			this.amplitude = 0.8 * this.velocity;
+			this.now = Date.now();
+			this.target = Math.round(this.game.camera.y - this.amplitude);
+			this.autoScroll = true;
+		}
+		if (!this.game.input.activePointer.withinGame) {
+			this.autoScroll = true;
+		}
+	},
 
-		var index = Math.floor((Math.random() * pokemon.length) % pokemon.length);
-		var name = pokemon[index].name;
+	moveCamera: function (pointer, x, y) {
+		if (this.dragging) {
+			var delta = y - this.startY;
+			this.startY = y;
+			this.now = Date.now();
+			var elapsed = this.now - this.timestamp;
+			this.timestamp = this.now;
 
-        var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, name, style);
+			var v = 1000 * delta / (1 + elapsed);
+			this.velocity = 0.8 * v + 0.2 * this.velocity;
 
-		text.anchor.set(0.5);    
-	}
+			this.game.camera.y -= delta;
+		}
+	},
+	//#endregion
+
+	createPokemonButton: function (x, y, w, h, i) {	
+		var button = this.game.add.button(x, y, 'button', showPokemonStats, this, 2, 1, 0);
+		button.index = i;
+		button.width = w;
+		button.height = h;
+
+		button.onInputOver.add(overButton, this);
+		button.onInputOut.add(outButton, this);
+		button.onInputUp.add(upButton, this);
+
+		var name = pokemon[i].name;
+		var text = this.game.add.text((x + (x + w)) / 2, (y + (y + h)) / 2, name, {font:'bold 40px Arial'});
+		text.anchor.set(0.5);
+		return button;
+	},	
 }
+
+//#region [rgba(70, 50, 30, 0.2)] Botones
+
+function overButton(e){
+	e.tint = 0xc0c0c0
+}
+
+function upButton(e){
+	pokemonSelected = e.index;
+	console.log(pokemon[pokemonSelected].name + ' clicked');
+	CodiPokedex.game.state.start('Stats');
+}
+
+function outButton(e){
+	e.tint = 0xffffff
+}
+
+function showPokemonStats(e){
+	e.tint = 0x00000;
+}
+
+
+//#endregion
