@@ -36,12 +36,25 @@ CodiPokedex.Stats = {
         button.height = 75;
 
         var pokemonType = this.game.add.text(this.game.width / 2, pokemonName.y + 100, 'Tipo: ' + pokemon[pokemonSelected].type1, {font:'bold 40px Arial', fill: '#fff'});
+        if(pokemon[pokemonSelected].type2 != ""){
+            pokemonType.setText('Tipo: ' + pokemon[pokemonSelected].type1 + "       " + pokemon[pokemonSelected].type2);
+        }
+
+
         pokemonType.anchor.setTo(0, 0.5);
         pokemonType.x = this.game.width / 2 - (pokemonType.width / 2) - 25;
 
-        var typeIcon = this.game.add.sprite(pokemonType.x + pokemonType.width + 50, pokemonType.y, 'typeIcon');
-        typeIcon.anchor.setTo(0.5);
-        typeIcon.scale.setTo(0.35);
+        var typeIcon1 = this.game.add.sprite(pokemonType.x + pokemonType.width + 50, pokemonType.y, 'typeIcon');
+        typeIcon1.anchor.setTo(0.5);
+        typeIcon1.scale.setTo(0.35);
+        
+        if(pokemon[pokemonSelected].type2 != ""){
+            var typeIcon2 = this.game.add.sprite(pokemonType.x + pokemonType.width * 0.5 + 40, pokemonType.y, 'typeIcon');
+            typeIcon2.anchor.setTo(0.5);
+            typeIcon2.scale.setTo(0.35);    
+        }
+        
+      
 
                 
         
