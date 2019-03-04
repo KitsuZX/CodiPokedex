@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>CodiPokedex</title>
 
-		<!-- External libraries -->
-		<script type="text/javascript" src="scripts/phaser.js"></script>
-		<script type="text/javascript" src="scripts/CanvasInput-master/CanvasInput.js"></script>
+<head>
+	<meta charset="utf-8">
+	<title>CodiPokedex</title>
 
-		<!-- States -->
-		<script type="text/javascript" src="src/states/Boot.js"></script>
-		<script type="text/javascript" src="src/states/Preload.js"></script>
-		<script type="text/javascript" src="src/states/Searcher.js"></script>
-		<script type="text/javascript" src="src/states/Stats.js"></script>
-	</head>
+	<!-- External libraries -->
+	<script type="text/javascript" src="scripts/phaser.js"></script>
+	<script type="text/javascript" src="scripts/CanvasInput-master/CanvasInput.js"></script>
 
-	<body>  
-		<style>
-			html, body, div, canvas {
-				margin: 0;
-				padding: 0;
-			}
-		</style>
-		<!-- include the main game file -->
-		<script src="src/index.js"></script>	
-	</body>
+	<script src="src/style.css"></script>
+
+	<!-- States -->
+	<script type="text/javascript" src="src/states/Boot.js"></script>
+	<script type="text/javascript" src="src/states/Preload.js"></script>
+	<script type="text/javascript" src="src/states/Searcher.js"></script>
+	<script type="text/javascript" src="src/states/Stats.js"></script>
+</head>
+
+<body>	
+
+	<style>
+		html,
+		body,
+		div,
+		canvas {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<!-- include the main game file -->
+	<script src="src/index.js"></script>
+</body>
+
 </html>

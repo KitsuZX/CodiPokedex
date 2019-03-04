@@ -18,6 +18,11 @@ CodiPokedex.Preload = {
 		this.load.image('searcherBG', 'assets/images/searcherBG.png')
 		this.load.image('backButton', 'assets/images/backButton.png')
 		this.load.image('background', 'assets/images/background.png')
+		this.load.image('statsBackground', 'assets/images/fondo.png')
+		this.load.image('pokeballBase', 'assets/images/pokeball base.png')
+		this.load.image('pokeballIcon', 'assets/images/pokeball icon simple white.png')
+		this.load.image('samplePokemon', 'assets/pokemonImages/257.png')
+		this.load.image('typeIcon', 'assets/images/electric.png')
 
 		this.game.load.json('pokemon', 'assets/data/pokemon.json');
 

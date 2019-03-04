@@ -2,6 +2,8 @@ var CodiPokedex = CodiPokedex || {};
 CodiPokedex.Searcher = function () { };
 
 var pokemonSelected = -1;
+var windowHeight = window.innerHeight * window.devicePixelRatio;
+var windowWidth = window.innerWidth * window.devicePixelRatio;
 
 //Setting game configuration and loading the assets for the loading screen
 CodiPokedex.Searcher = {
@@ -9,15 +11,15 @@ CodiPokedex.Searcher = {
 	create() {
 		this.game.stage.backgroundColor = '#fff';
 
-		var background = this.game.add.sprite(0, 0, 'background');
-		background.width = window.innerWidth;
-		background.height = window.innerHeight;
+		var background = this.game.add.sprite(0, 0, 'statsBackground');
+		background.width = windowWidth;
+		background.height = windowHeight;
 		background.fixedToCamera = true;
 
 
 		this.leftSide = this.game.add.sprite(0, 0, 'searcherBG');
 		this.leftSide.width = 350;
-		this.leftSide.height = window.innerHeight;
+		this.leftSide.height = windowHeight;
 		this.leftSide.fixedToCamera = true;
 
 		var text = this.game.add.text((this.leftSide.x + this.leftSide.width / 2), 100, 'Buscador', {font:'bold 40px Arial', fill: '#fff'});
@@ -60,18 +62,18 @@ CodiPokedex.Searcher = {
 		//Parametros del scroll. No tocar.
 		this.dragging = false;
 		this.autoScroll = false;
-		this.timeConstant = 325;
+		this.timeConstant = 325;		
 		this.game.input.onDown.add(this.beginMove, this);
 		this.game.input.onUp.add(this.endMove, this);
 		this.game.input.addMoveCallback(this.moveCamera, this);
 
 		
 		//Crear cuadros para insertar texto
-		this.myInput = createInput((this.leftSide.x + this.leftSide.width) / 2, 300);
-		this.myInput.width = 300;
-		this.myInput.anchor.set(0.5);
-		this.myInput.canvasInput.value('Furro el que lo lea');
-   		
+		this.textInput = createInput((this.leftSide.x + this.leftSide.width) / 2, 250);
+		this.textInput.width = 300;
+		this.textInput.anchor.set(0.5);
+		this.textInput.canvasInput.value('Furro el que lo lea')
+		this.textInput.fixedToCamera = true; 		
 		
 	},
 
@@ -90,7 +92,7 @@ CodiPokedex.Searcher = {
 			}
 		}
 
-		this.myInput.canvasInput.focus();
+		this.textInput.canvasInput.focus();
 	},
 
 	//#region [rgba(0, 50, 30, 0.2)] Movimiento scroll
@@ -173,7 +175,7 @@ function showPokemonStats(e){
 
 //#region [rgba(50, 0, 80, 0.2)] Text Input
 function render(){
-  this.game.debug.spriteBounds(this.myInput);
+  this.game.debug.spriteBounds(this.textInput);
 }
 
 function inputFocus(sprite){
@@ -183,9 +185,9 @@ function inputFocus(sprite){
 
 function createInput(x, y){
     var bmd = CodiPokedex.game.add.bitmapData(400, 50);    
-    var myInput = CodiPokedex.game.add.sprite(x, y, bmd);
+    var textInput = CodiPokedex.game.add.sprite(x, y, bmd);
     
-    myInput.canvasInput = new CanvasInput({
+    textInput.canvasInput = new CanvasInput({
       canvas: bmd.canvas,
       fontSize: 30,
       fontFamily: 'Arial',
@@ -197,13 +199,31 @@ function createInput(x, y){
       borderColor: '#000',
       borderRadius: 3,
       boxShadow: '1px 1px 0px #fff',
-      innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
+      innerShadow: '0spx 0px 5px rgba(0, 0, 0, 0.5)',
       placeHolder: 'Enter message here...'
     });
-    myInput.inputEnabled = true;
-    myInput.input.useHandCursor = true;    
-    myInput.events.onInputUp.add(inputFocus, this);
+    textInput.inputEnabled = true;
+    textInput.input.useHandCursor = true;    
+    textInput.events.onInputUp.add(inputFocus, this);
     
-    return myInput;
+    return textInput;
 }
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
 //#endregion
