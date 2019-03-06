@@ -66,18 +66,16 @@ CodiPokedex.Searcher = {
 		this.game.input.onDown.add(this.beginMove, this);
 		this.game.input.onUp.add(this.endMove, this);
 		this.game.input.addMoveCallback(this.moveCamera, this);
-
+		
 		
 		//Crear cuadros para insertar texto
-		this.textInput = createInput((this.leftSide.x + this.leftSide.width) / 2, 250);
-		this.textInput.width = 300;
-		this.textInput.anchor.set(0.5);
-		this.textInput.canvasInput.value('Furro el que lo lea')
-		this.textInput.fixedToCamera = true; 		
-		
+		this.texto = this.game.add.text(50, 50, "", {font:'bold 100px Arial', fill: '#fff'});
+		this.texto2 = this.game.add.text(200, 200, "", {font:'bold 100px Arial', fill: '#fff'});
 	},
 
 	update: function () {
+		
+		
 		//Scroll 
 		if (this.autoScroll && this.amplitude != 0) {
 			this.elapsed = Date.now() - this.timestamp;
@@ -92,7 +90,10 @@ CodiPokedex.Searcher = {
 			}
 		}
 
-		this.textInput.canvasInput.focus();
+		this.textoBusqueda = document.getElementById("Busqueda").value;
+		this.textoTipo = document.getElementById("tipo1").value;
+		this.texto.setText(this.textoBusqueda);
+		this.texto2.setText(this.textoTipo);
 	},
 
 	//#region [rgba(0, 50, 30, 0.2)] Movimiento scroll
