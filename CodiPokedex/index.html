@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<style>
-		input[type=text]{
-			position: absolute;
-  			z-index: 1000;
-			width: 10%;
-			padding: 12px 20px;
-			margin: 150px 100px;
-			display: inline-block;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			box-sizing: border-box;
-			font-size: 200%;
-		}
-		select{
-			position: absolute;
-			z-index: 1000;
-			margin: 500px 100px;
-			width: 10%;
-			padding: 12px 20px;
-			display: inline-block;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			box-sizing: border-box;
-			font-size: 200%;
-		}
+<style>
+	input[type=text] {
+		position: absolute;
+		z-index: 1000;
+		width: 10%;
+		padding: 12px 20px;
+		margin: 150px 100px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
 
-	</style>
+	select {
+		position: absolute;
+		z-index: 1000;
+		margin: 500px 100px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
+</style>
 
 <head>
 	<meta charset="utf-8">
@@ -34,6 +34,7 @@
 
 	<!-- External libraries -->
 	<script type="text/javascript" src="scripts/phaser.js"></script>
+	<script type="text/javascript" src="scripts/Chart.js"></script>
 	<script type="text/javascript" src="scripts/CanvasInput-master/CanvasInput.js"></script>
 
 	<script src="src/style.css"></script>
@@ -45,27 +46,26 @@
 	<script type="text/javascript" src="src/states/Stats.js"></script>
 </head>
 
-	<body>	
-		
-		<input type="text" id="Busqueda">
+<body>
 
-		<select id="tipo1" name="Tipo 1">
-				<option value="Fuego">Fuego</option>
-				<option value="Planta">Planta</option>
-				<option value="Agua">Agua</option>
-		</select>
-		
-		<style>
-			html,
-			body,
-			div,
-			canvas {
-				margin: 0;
-				padding: 0;
-			}
-		</style>
-		<!-- include the main game file -->
-		<script src="src/index.js"></script>
-	</body>
+	<input type="text" id="Busqueda">
+	<select id="tipo1" name="Tipo 1">
+		<option value="Fuego">Fuego</option>
+		<option value="Planta">Planta</option>
+		<option value="Agua">Agua</option>
+	</select>
+
+	<style>
+		html,
+		body,
+		div,
+		canvas {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<!-- include the main game file -->
+	<script src="src/index.js"></script>
+</body>
 
 </html>
