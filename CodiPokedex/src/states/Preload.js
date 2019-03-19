@@ -47,6 +47,11 @@ CodiPokedex.Preload = {
 
 		this.game.load.json('pokemon', 'assets/data/pokemon.json');
 
+		//Load pokemons
+		for (let i = 0; i < 721; i++) {
+			this.load.image('pokemonImage'+i, 'assets/pokemonImages/' + (i + 1)+ '.png');			
+		}
+
 	},
 
 	create: function(){

@@ -7,7 +7,10 @@ var windowWidth = window.innerWidth * window.devicePixelRatio;
 
 //Setting game configuration and loading the assets for the loading screen
 CodiPokedex.Searcher = {
+	preload(){
 
+	},
+	
 	create() {
 		this.game.stage.backgroundColor = '#fff';
 
@@ -34,14 +37,14 @@ CodiPokedex.Searcher = {
 		var initX = 400;
 		var initY = 50;
 
-		var numPokemons = 32;
+		var numPokemons = 721;
 		var pokemonsPerRow = 5;
 
-		var buttonWidth = 250;
-		var buttonHeight = 400;
+		var buttonWidth = 225;
+		var buttonHeight = 225;
 
-		var xOffset = 50;
-		var yOffset = 50;
+		var xOffset = 75;
+		var yOffset = 75;
 
 		var X = initX;
 		var Y = initY;
@@ -76,8 +79,6 @@ CodiPokedex.Searcher = {
 	},
 
 	update: function () {
-
-
 		//Scroll 
 		if (this.autoScroll && this.amplitude != 0) {
 			this.elapsed = Date.now() - this.timestamp;
@@ -136,8 +137,8 @@ CodiPokedex.Searcher = {
 	},
 	//#endregion
 
-	createPokemonButton: function (x, y, w, h, i) {
-		var button = this.game.add.button(x, y, 'button', showPokemonStats, this, 2, 1, 0);
+	createPokemonButton: function (x, y, w, h, i) {	
+		var button = this.game.add.button(x, y, 'pokemonImage'+i, showPokemonStats, this, 2, 1, 0);
 		button.index = i;
 		button.width = w;
 		button.height = h;
@@ -147,8 +148,9 @@ CodiPokedex.Searcher = {
 		button.onInputUp.add(upButton, this);
 
 		var name = pokemon[i].name;
-		var text = this.game.add.text((x + (x + w)) / 2, (y + (y + h)) / 2, name, { font: 'bold 40px Arial' });
+		var text = this.game.add.text((x + (x + w)) / 2, y + h + 25, '#'+ (i + 1) + ' ' + name, { font: 'bold 40px Arial', fill: '#fff' });
 		text.anchor.set(0.5);
+		
 		return button;
 	},
 

@@ -3,6 +3,10 @@ CodiPokedex.Stats = function () { };
 
 CodiPokedex.Stats = {
 
+    preload: function(){
+        this.load.image('pokemonImage', 'assets/pokemonImages/' + (pokemonSelected + 1)+ '.png');
+    },
+
     create: function () {
 
         this.hideHTML();
@@ -32,7 +36,7 @@ CodiPokedex.Stats = {
         pokeballIcon.anchor.setTo(0.5);
         pokeballIcon.scale.setTo(0.4);
         //Pokemon image
-        var pokemonImage = this.game.add.sprite(windowWidth / 2, windowHeight / 2 - 175, 'samplePokemon');
+        var pokemonImage = this.game.add.sprite(windowWidth / 2, windowHeight / 2 - 125, 'pokemonImage');
         pokemonImage.anchor.setTo(0.5);
         pokemonImage.scale.setTo(1.2);
 
@@ -123,7 +127,7 @@ CodiPokedex.Stats = {
         bars[5].width = this.calculateBarWidth(bars[5].width, pokemon[pokemonSelected].speed);
 
         //Debilidades
-        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 100, 'Fuerte contra', { font: 'bold 50px Arial', fill: '#fff' })       
+        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 100, 'Débil contra', { font: 'bold 50px Arial', fill: '#fff' })       
         debText.anchor.setTo(0.5);
 
         var sprites = this.getFortalezas();
@@ -139,7 +143,7 @@ CodiPokedex.Stats = {
             X += xOff;                    
         }
 
-        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 300, 'Débil contra', { font: 'bold 50px Arial', fill: '#fff' })       
+        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 300, 'Fuerte contra', { font: 'bold 50px Arial', fill: '#fff' })       
         debText.anchor.setTo(0.5);
 
         var spritesF = this.getDebilidades();
