@@ -1112,7 +1112,7 @@
 			"sp_defense": 85,
 			"speed": 110,
 			"type1": "electric",
-			"type2": "electric",
+			"type2": "",
 			"weight_kg": "",
 			"generation": 1,
 			"is_legendary": 0

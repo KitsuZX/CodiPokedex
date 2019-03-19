@@ -2,6 +2,7 @@ var CodiPokedex = CodiPokedex || {};
 CodiPokedex.Preload = function(){};
 
 var pokemon;
+var numPokemons = 721;
 
 CodiPokedex.Preload = {
 	//Loading the game assets
@@ -48,7 +49,7 @@ CodiPokedex.Preload = {
 		this.game.load.json('pokemon', 'assets/data/pokemon.json');
 
 		//Load pokemons
-		for (let i = 0; i < 721; i++) {
+		for (let i = 0; i < numPokemons; i++) {
 			this.load.image('pokemonImage'+i, 'assets/pokemonImages/' + (i + 1)+ '.png');			
 		}
 

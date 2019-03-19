@@ -383,7 +383,7 @@ CodiPokedex.Stats = {
             sprites.push(this.game.make.sprite(0, 0, 'normalIcon'));
         }
         
-        if(pokemon[pokemonSelected].type1 == "posion" ||  pokemon[pokemonSelected].type2 == "poison"){
+        if(pokemon[pokemonSelected].type1 == "poison" ||  pokemon[pokemonSelected].type2 == "poison"){
             sprites.push(this.game.make.sprite(0, 0, 'posionIcon'));
         }
 

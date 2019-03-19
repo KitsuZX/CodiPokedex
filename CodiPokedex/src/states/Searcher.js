@@ -4,6 +4,7 @@ CodiPokedex.Searcher = function () { };
 var pokemonSelected = -1;
 var windowHeight = window.innerHeight * window.devicePixelRatio;
 var windowWidth = window.innerWidth * window.devicePixelRatio;
+var cameraPosition = 0;
 
 //Setting game configuration and loading the assets for the loading screen
 CodiPokedex.Searcher = {
@@ -12,7 +13,7 @@ CodiPokedex.Searcher = {
 	},
 	
 	create() {
-		this.game.stage.backgroundColor = '#fff';
+		this.game.stage.backgroundColor = '#fff';	
 
 		var background = this.game.add.sprite(0, 0, 'statsBackground');
 		background.width = windowWidth;
@@ -31,13 +32,14 @@ CodiPokedex.Searcher = {
 		text.anchor.setTo(0.5);
 		text.fixedToCamera = true;
 
+		this.game.camera.y = cameraPosition;
+
 		//Crea los rectángulos
 		this.rectangles = [];
 
 		var initX = 400;
-		var initY = 50;
+		var initY = 50;	
 
-		var numPokemons = 721;
 		var pokemonsPerRow = 5;
 
 		var buttonWidth = 225;
@@ -137,7 +139,12 @@ CodiPokedex.Searcher = {
 	},
 	//#endregion
 
-	createPokemonButton: function (x, y, w, h, i) {	
+	createPokemonButton: function (x, y, w, h, i) {
+
+		var index = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(i+1), { font: 'bold 75px Arial', fill: '#fff' });
+		index.anchor.set(0.5);
+		index.alpha = 0.6;
+
 		var button = this.game.add.button(x, y, 'pokemonImage'+i, showPokemonStats, this, 2, 1, 0);
 		button.index = i;
 		button.width = w;
@@ -147,8 +154,8 @@ CodiPokedex.Searcher = {
 		button.onInputOut.add(outButton, this);
 		button.onInputUp.add(upButton, this);
 
-		var name = pokemon[i].name;
-		var text = this.game.add.text((x + (x + w)) / 2, y + h + 25, '#'+ (i + 1) + ' ' + name, { font: 'bold 40px Arial', fill: '#fff' });
+		var name = pokemon[i].name;		
+		var text = this.game.add.text((x + (x + w)) * 0.5, y + h + 25,name, { font: 'bold 40px Arial', fill: '#fff' });
 		text.anchor.set(0.5);
 		
 		return button;
@@ -173,6 +180,7 @@ function upButton(e) {
 	pokemonSelected = e.index;
 	console.log(pokemon[pokemonSelected].name + ' clicked');
 	CodiPokedex.game.state.start('Stats');
+	cameraPosition = CodiPokedex.Searcher.game.camera.y;
 }
 
 function outButton(e) {
