@@ -1,7 +1,5 @@
-//var CodiPokedex = CodiPokedex || {};
-//CodiPokedex.game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, 'game');
 
-// Import express
+/*// Import express
 let express = require('express');
 // Import Body parser
 let bodyParser = require('body-parser');
@@ -28,7 +26,25 @@ app.use('/api', apiRoutes)
 // Launch app to listen to specified port
 app.listen(port, function () {
     console.log("Running RestHub on port " + port);
-});
+});*/
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/pokemonDB";
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("pokemonDB");
+    dbo.collection("pokemonCollection").find({}).toArray(function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      db.close();
+    });
+  });
+
+
+
+//var CodiPokedex = CodiPokedex || {};
+//CodiPokedex.game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, 'game');
 
 /*States
 CodiPokedex.game.state.add('Boot', CodiPokedex.Boot);
