@@ -35,18 +35,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // Import Mongoose
 var MongoClient = require('mongodb');
-var url = "mongodb://localhost:27017/";
+var url = "mongodb://localhost:27017/pokemonDB";
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     const dbo = db.db('pokemonDB');
     dbo.collection("pokemonCollection").find({}).toArray(function(err, result) {
-      if (err) throw err;
-      //console.log(result);
-      getPokemons(result);
-      db.close();
+    if (err) throw err;
+    console.log(result);
+    //getPokemons(result);
+    db.close();
     });
-  });
+});
 
 var pokemons;
 function getPokemons(result){
