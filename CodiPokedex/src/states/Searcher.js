@@ -22,7 +22,6 @@ CodiPokedex.Searcher = {
 
 		this.showHTML();
 
-
 		this.leftSide = this.game.add.sprite(0, 0, 'searcherBG');
 		this.leftSide.width = 350;
 		this.leftSide.height = windowHeight;
@@ -31,6 +30,7 @@ CodiPokedex.Searcher = {
 		var text = this.game.add.text((this.leftSide.x + this.leftSide.width / 2), 100, 'Buscador', { font: 'bold 40px Arial', fill: '#fff' });
 		text.anchor.setTo(0.5);
 		text.fixedToCamera = true;
+		
 
 		this.game.camera.y = cameraPosition;
 
@@ -51,7 +51,7 @@ CodiPokedex.Searcher = {
 		var X = initX;
 		var Y = initY;
 
-		for (var i = 0; i < numPokemons; i++) {
+		/*for (var i = 0; i < numPokemons; i++) {
 			var x = X;
 			var y = Y;
 			this.rectangles.push(this.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
@@ -61,7 +61,7 @@ CodiPokedex.Searcher = {
 			} else {
 				X += buttonWidth + xOffset;
 			}
-		}
+		}*/
 
 		//Aumenta los bordes del mundo para que quepan todos los rectángulos
 		this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));

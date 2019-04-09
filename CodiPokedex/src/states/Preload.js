@@ -22,7 +22,7 @@ CodiPokedex.Preload = {
 		this.load.image('statsBackground', 'assets/images/fondo.png')
 		this.load.image('pokeballBase', 'assets/images/pokeball base.png')
 		this.load.image('pokeballIcon', 'assets/images/pokeball icon simple white.png')
-		this.load.image('samplePokemon', 'assets/pokemonImages/257.png')
+		//this.load.image('samplePokemon', 'assets/pokemonImages/257.png')
 		this.load.image('typeIcon', 'assets/images/electric.png')
 		this.load.image('profileBG', 'assets/images/blue rectangle.png')
 		this.load.image('progressBar', 'assets/images/progressBar.jpg')
@@ -46,19 +46,22 @@ CodiPokedex.Preload = {
 		this.load.image('steelIcon', 'assets/images/Icon/steelIcon.png')
 		this.load.image('waterIcon', 'assets/images/Icon/waterIcon.png')
 
-		this.game.load.json('pokemon', 'assets/data/pokemon.json');
+		/*this.game.load.json('pokemon', 'assets/data/pokemon.json');
 
-		//Load pokemons
+		Load pokemons
 		for (let i = 0; i < numPokemons; i++) {
-			this.load.image('pokemonImage'+i, 'assets/pokemonImages/' + (i + 1)+ '.png');			
+			//this.load.image('pokemonImage'+i, 'assets/pokemonImages/' + (i + 1)+ '.png');			
 		}
-
+		*/
 	},
-
+	
 	create: function(){
-		this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
-		pokemon = this.pokemon;
-
-		this.state.start('Searcher');
+		//this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
+		//pokemon = this.pokemon;
+		this.state.start('Searcher');	
+		
 	}
-}
+	
+	}
+
+	
