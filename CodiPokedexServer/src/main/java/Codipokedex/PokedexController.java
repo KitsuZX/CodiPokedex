@@ -48,9 +48,14 @@ public class PokedexController {
 			
 		
 		DBCursor cursor = pokemonCollection.find(whereQuery);
-		cursor.sort(new BasicDBObject("pokedex_number ", -1));
+		cursor.sort(new BasicDBObject("pokedex_number", Integer.parseInt(query.orden)));
+		all = cursor.toArray();
+		//if(Integer.parseInt(query.orden) == -1) {
+			  //Collections.reverse(all);
+		//}
 		
-		try {
+		cursor.close();	
+		/*try {
 		    while(cursor.hasNext()) {
 		    	DBObject c = cursor.next();
 				//String s = c.toString();
@@ -58,8 +63,7 @@ public class PokedexController {
 		    }
 		} finally {
 		    cursor.close();
-		}
-		//DBObject dbObj = pokemonCollection.find(query);
+		}*/
 		
 	    return all;
 	}

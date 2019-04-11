@@ -34,7 +34,10 @@ CodiPokedex.Searcher = {
 
 		this.game.camera.y = cameraPosition;
 
-		//Crea los rectángulos
+		this.rectangles = [];
+		this.indexes = [];
+		this.names = [];
+		/*Crea los rectángulos
 		this.rectangles = [];
 
 		var initX = 400;
@@ -48,8 +51,7 @@ CodiPokedex.Searcher = {
 		var xOffset = 75;
 		var yOffset = 75;
 
-		var X = initX;
-		var Y = initY;
+		
 
 		for (var i = 0; i < numPokemons; i++) {
 			var x = X;
@@ -61,10 +63,10 @@ CodiPokedex.Searcher = {
 			} else {
 				X += buttonWidth + xOffset;
 			}
-		}
+		}*/
 
 		//Aumenta los bordes del mundo para que quepan todos los rectángulos
-		this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
+		//this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
 
 		//Parametros del scroll. No tocar.
 		this.dragging = false;
@@ -79,7 +81,7 @@ CodiPokedex.Searcher = {
 		this.texto = this.game.add.text(50, 50, "", { font: 'bold 100px Arial', fill: '#fff' });
 		this.texto2 = this.game.add.text(200, 200, "", { font: 'bold 100px Arial', fill: '#fff' }); 
 
-		this.isLegendary = 0;
+		this.getPokemon();
 		
 	},
 
@@ -144,12 +146,12 @@ CodiPokedex.Searcher = {
 
 	createPokemonButton: function (x, y, w, h, i) {
 
-		var index = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(i+1), { font: 'bold 75px Arial', fill: '#fff' });
-		index.anchor.set(0.5);
-		index.alpha = 0.6;
+		this.indexes[i] = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(pokemon[i].pokedex_number+1), { font: 'bold 75px Arial', fill: '#fff' });
+		this.indexes[i].anchor.set(0.5);
+		this.indexes[i].alpha = 0.6;
 
-		var button = this.game.add.button(x, y, 'pokemonImage'+i, showPokemonStats, this, 2, 1, 0);
-		button.index = i;
+		var button = this.game.add.button(x, y, 'button',/*'pokemonImage'+i,*/ showPokemonStats, this, 2, 1, 0);
+		button.index = pokemon[i].pokedex_number;
 		button.width = w;
 		button.height = h;
 
@@ -157,9 +159,9 @@ CodiPokedex.Searcher = {
 		button.onInputOut.add(outButton, this);
 		button.onInputUp.add(upButton, this);
 
-		var name = pokemon[i].name;		
-		var text = this.game.add.text((x + (x + w)) * 0.5, y + h + 25,name, { font: 'bold 40px Arial', fill: '#fff' });
-		text.anchor.set(0.5);
+		//var name = pokemon[i].name;		
+		this.names[i] = this.game.add.text((x + (x + w)) * 0.5, y + h + 25,pokemon[i].name, { font: 'bold 40px Arial', fill: '#fff' });
+		this.names[i].anchor.set(0.5);
 		
 		return button;
 	},
@@ -170,7 +172,101 @@ CodiPokedex.Searcher = {
 
 		x = document.getElementById("tipo1");
 		x.style.display = "block";
+
+		document.getElementById("ordenAscendente").style.display = "block";
+        document.getElementById("ordenDescendente").style.display = "block";
+        document.getElementById("generaciones").style.display = "block";
+        document.getElementById("is_Legendary").style.display = "block";
+        document.getElementById("tipo2").style.display = "block";
+        document.getElementById("filter").style.display = "block";
+	},
+
+	//#region [rgba(252, 522, 122, 0.1)] Server conexions/filters
+	getPokemon: function (){
+
+		var ordenP= 0;
+		if(document.getElementById("ordenAscendente").checked){
+			ordenP = document.getElementById("ordenAscendente").value;
+		}else{
+			ordenP = document.getElementById("ordenDescendente").value;
+		}
+
+		var query = {
+			//name: document.getElementById("Busqueda").value,
+			generation: document.getElementById("generaciones").value,
+			orden : ordenP,
+			is_legendary : document.getElementById("is_Legendary").value,
+			type1: document.getElementById("tipo1").value,
+			type2: document.getElementById("tipo2").value
+		}
+		query = JSON.stringify(query);
+
+		this.askServer(query);
+		
+	},
+
+	askServer: function(query){
+		$.ajax("/getPokemon", 
+				{
+					method: "POST",
+					data: query,
+					processData: false,					
+					
+					headers:{
+						"Content-Type": "application/json"
+					},
+
+					success: function(data){        
+						
+						/*for(i = 0; i < data.length;i++){
+							console.log(data[i].name);
+						}*/
+
+						for(i = 0; i < CodiPokedex.Searcher.rectangles.length;i++){
+							CodiPokedex.Searcher.rectangles[i].destroy();
+							CodiPokedex.Searcher.names[i].destroy();
+							CodiPokedex.Searcher.indexes[i].destroy();
+						}
+
+						pokemon = data;
+						numPokemons = data.length;
+
+						//Crea los rectángulos
+						CodiPokedex.Searcher.rectangles = [];
+
+						var initX = 400;
+						var initY = 50;	
+
+						var pokemonsPerRow = 5;
+
+						var buttonWidth = 225;
+						var buttonHeight = 225;
+
+						var xOffset = 75;
+						var yOffset = 75;
+
+						var X = initX;
+						var Y = initY;
+
+						for (var i = 0; i < numPokemons; i++) {
+							var x = X;
+							var y = Y;
+							CodiPokedex.Searcher.rectangles.push(CodiPokedex.Searcher.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
+							if ((i + 1) % pokemonsPerRow == 0) {
+								Y += buttonHeight + yOffset;
+								X = initX;
+							} else {
+								X += buttonWidth + xOffset;
+							}
+						}
+
+						CodiPokedex.Searcher.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
+
+					}
+				}
+			); 
 	}
+
 }
 
 //#region [rgba(70, 50, 30, 0.2)] Botones
@@ -180,10 +276,18 @@ function overButton(e) {
 }
 
 function upButton(e) {
-	pokemonSelected = e.index;
-	console.log(pokemon[pokemonSelected].name + ' clicked');
+	pokemonSelected = getPokemonSelected(e);
+	console.log(pokemonSelected.name + ' clicked');
 	CodiPokedex.game.state.start('Stats');
 	cameraPosition = CodiPokedex.Searcher.game.camera.y;
+}
+
+function getPokemonSelected(e){
+	for(i = 0;i < pokemon.length;i++){
+		if(pokemon[i].pokedex_number == e.index){
+			return pokemon[i];
+		}
+	}
 }
 
 function outButton(e) {
@@ -252,42 +356,5 @@ window.onclick = function (event) {
 }
 //#endregion
 
-//#region [rgba(252, 522, 122, 0.2)] Server conexions/filters
-function getPokemon(){
 
-	var ordenP= 0;
-	if(document.getElementById("ordenAscendente").checked){
-		ordenP = document.getElementById("ordenAscendente").value;
-	}else{
-		ordenP = document.getElementById("ordenDescendente").value;
-	}
 
-	var query = {
-		//name: document.getElementById("Busqueda").value,
-		generation: document.getElementById("generaciones").value,
-		orden : ordenP,
-		is_legendary : document.getElementById("is_Legendary").value,
-		type1: document.getElementById("tipo1").value,
-		type2: document.getElementById("tipo2").value
-	}
-	query = JSON.stringify(query);
-
-	$.ajax("/getPokemon", 
-			{
-				method: "POST",
-				data: query,
-				processData: false,					
-				
-				headers:{
-					"Content-Type": "application/json"
-				},
-
-				success: function(data){        
-					
-					for(i = 0; i < data.length;i++){
-						console.log(data[i].name);
-					}
-				}
-			}
-		); 
-}
