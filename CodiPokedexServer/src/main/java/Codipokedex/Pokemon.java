@@ -12,4 +12,6 @@ public class Pokemon {
 	public String generation = "";
 	public String orden = "";
 	public String is_legendary = "";
+	public String pokedex_number = "";
+	public String abilities = "";
 }

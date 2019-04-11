@@ -173,6 +173,19 @@ CodiPokedex.Stats = {
         document.getElementById("is_Legendary").style.display = "none";
         document.getElementById("tipo2").style.display = "none";
         document.getElementById("filter").style.display = "none";
+
+        document.getElementById("crear").style.display = "none";
+		document.getElementById("borrar").style.display = "none";
+        document.getElementById("PokemonName").style.display = "none";
+        document.getElementById("PokemonPokedexNumber").style.display = "none";
+        document.getElementById("PokemonType1").style.display = "none";
+        document.getElementById("PokemonType2").style.display = "none";
+        document.getElementById("PokemonAbilities").style.display = "none";
+        document.getElementById("Pokemonis_Legendary").style.display = "none";
+        document.getElementById("PokemonCreate").style.display = "none";
+
+        document.getElementById("DeletePokedexNumber").style.display = "none";
+		document.getElementById("PokemonDelete").style.display = "none";
     },
 
     calculateBarWidth(originalWidth, value){

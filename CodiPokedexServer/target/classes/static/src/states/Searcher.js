@@ -146,7 +146,7 @@ CodiPokedex.Searcher = {
 
 	createPokemonButton: function (x, y, w, h, i) {
 
-		this.indexes[i] = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(pokemon[i].pokedex_number+1), { font: 'bold 75px Arial', fill: '#fff' });
+		this.indexes[i] = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(pokemon[i].pokedex_number), { font: 'bold 75px Arial', fill: '#fff' });
 		this.indexes[i].anchor.set(0.5);
 		this.indexes[i].alpha = 0.6;
 
@@ -178,7 +178,23 @@ CodiPokedex.Searcher = {
         document.getElementById("generaciones").style.display = "block";
         document.getElementById("is_Legendary").style.display = "block";
         document.getElementById("tipo2").style.display = "block";
-        document.getElementById("filter").style.display = "block";
+		document.getElementById("filter").style.display = "block";
+		document.getElementById("crear").style.display = "block";
+		document.getElementById("borrar").style.display = "block";
+		
+		
+		document.getElementById("PokemonName").style.display = "none";
+        document.getElementById("PokemonPokedexNumber").style.display = "none";
+        document.getElementById("PokemonType1").style.display = "none";
+        document.getElementById("PokemonType2").style.display = "none";
+		document.getElementById("PokemonAbilities").style.display = "none";
+		document.getElementById("Pokemonis_Legendary").style.display = "none";
+		document.getElementById("PokemonCreate").style.display = "none";
+
+		document.getElementById("DeletePokedexNumber").style.display = "none";
+		document.getElementById("PokemonDelete").style.display = "none";
+
+
 	},
 
 	//#region [rgba(252, 522, 122, 0.1)] Server conexions/filters

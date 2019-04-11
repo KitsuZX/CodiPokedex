@@ -86,6 +86,150 @@
 		font-size: 200%;
 	}
 
+	input[id = "crear"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 800px 100px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
+
+	input[id = "borrar"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 900px 100px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
+
+	input[id = "PokemonName"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 400px 200px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}
+	input[id = "PokemonPokedexNumber"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 400px 400px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}
+	select[id = "PokemonType1"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 600px 200px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}
+	select[id = "PokemonType2"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 600px 400px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}	
+	input[id = "PokemonAbilities"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 800px 300px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}
+
+	select[id = "Pokemonis_Legendary"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 400px 600px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
+
+	input[id = "PokemonCreate"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 600px 900px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
+
+	input[id = "DeletePokedexNumber"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 400px 700px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+		display: none;
+	}
+
+	input[id = "PokemonDelete"] {
+		position: absolute;
+		z-index: 1000;
+		margin: 600px 700px;
+		width: 10%;
+		padding: 12px 20px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		font-size: 200%;
+	}
 
 </style>
 
@@ -105,6 +249,9 @@
 	<script type="text/javascript" src="src/states/Preload.js"></script>
 	<script type="text/javascript" src="src/states/Searcher.js"></script>
 	<script type="text/javascript" src="src/states/Stats.js"></script>
+	<script type="text/javascript" src="src/states/Creator.js"></script>
+	<script type="text/javascript" src="src/states/Deleter.js"></script>
+
 </head>
 
 <body>
@@ -120,6 +267,7 @@
 			<option value="5">5</option>
 			<option value="6">6</option>
 			<option value="7">7</option>
+			<option value="8">8</option>
 	</select>
 
 	<form>
@@ -181,6 +329,68 @@
 	</select>
 
 	<input id = "filter" type="button" onclick = "CodiPokedex.Searcher.getPokemon()" value="Filtrar">
+
+	<input id = "crear" type="button" onclick = "CodiPokedex.Searcher.state.start('Creator')" value="Crear Pokemon">
+	<input id = "borrar" type="button" onclick = "CodiPokedex.Searcher.state.start('Deleter')" value="Borrar Pokemon">
+
+	<!--Interfaz de pantalla de crear Pokemons -->
+	<input type="text" id="PokemonName">
+	<input type="text" id="PokemonPokedexNumber">
+	<input type="text" id="PokemonAbilities">
+	<select id="PokemonType1" name="Tipo 1">
+		<option value="fire">Fuego</option>
+		<option value="grass">Planta</option>
+		<option value="water">Agua</option>
+
+		<option value="bug">Bicho</option>
+		<option value="dark">Oscuridad</option>
+		<option value="dragon">Dragon</option>
+		<option value="electric">Eléctrico</option>
+		<option value="fying">Volador</option>
+		<option value="ghost">Fantasma</option>
+		<option value="ground">Tierra</option>
+		<option value="fairy">Hada</option>
+		<option value="ice">Hielo</option>
+		<option value="fighting">Lucha</option>
+		<option value="normal">Normal</option>
+		<option value="poison">Veneno</option>
+		<option value="psychic">Psíquico</option>
+		<option value="rock">Roca</option>
+		<option value="steel">Acero</option>
+
+	</select>
+	<select id="PokemonType2" name="Tipo 2">
+		<option value="">Cualquiera</option>
+		<option value="fire">Fuego</option>
+		<option value="grass">Planta</option>
+		<option value="water">Agua</option>
+
+		<option value="bug">Bicho</option>
+		<option value="dark">Oscuridad</option>
+		<option value="dragon">Dragon</option>
+		<option value="electric">Eléctrico</option>
+		<option value="fying">Volador</option>
+		<option value="ghost">Fantasma</option>
+		<option value="ground">Tierra</option>
+		<option value="fairy">Hada</option>
+		<option value="ice">Hielo</option>
+		<option value="fighting">Lucha</option>
+		<option value="normal">Normal</option>
+		<option value="poison">Veneno</option>
+		<option value="psychic">Psíquico</option>
+		<option value="rock">Roca</option>
+		<option value="steel">Acero</option>
+
+	</select>
+	<select id="Pokemonis_Legendary" name="Tipo 1">
+			<option value="1">Legendario</option>
+			<option value="0">No legendario</option>	
+	</select>
+	<input id = "PokemonCreate" type="button" onclick = "CodiPokedex.Creator.createPokemon()" value="Crear">
+
+	<!--Interfaz de pantalla de borrar Pokemons -->
+	<input type="text" id="DeletePokedexNumber">
+	<input id = "PokemonDelete" type="button" onclick = "CodiPokedex.Deleter.deletePokemon()" value="Borrar">
 
 	<style>
 		html,

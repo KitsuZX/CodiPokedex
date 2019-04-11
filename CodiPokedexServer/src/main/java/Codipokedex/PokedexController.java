@@ -67,5 +67,53 @@ public class PokedexController {
 		
 	    return all;
 	}
-
+	
+	@PostMapping(value = "/addPokemon")
+	public String AddPokemon(@RequestBody Pokemon query){	
+		String s = new String("");
+		
+		BasicDBObject whereQuery = new BasicDBObject();
+		List<DBObject> all = new ArrayList<DBObject>(); 
+		whereQuery.put("pokedex_number", Integer.parseInt(query.pokedex_number));
+		DBCursor cursor = pokemonCollection.find(whereQuery);
+		all = cursor.toArray();
+		if(all.isEmpty()) { 
+			BasicDBObject document = new BasicDBObject();
+			document.put("name", query.name);
+			document.put("type1", query.type1);
+			document.put("type2", query.type2);
+			document.put("abilities", query.abilities);
+			document.put("is_legendary", Integer.parseInt(query.is_legendary));
+			document.put("pokedex_number",  Integer.parseInt(query.pokedex_number));
+			document.put("generation", 8);
+			
+			pokemonCollection.insert(document);
+			s = "Pokemon insertado con éxito";
+		}else {
+			s = "Ya existe un pokemon con ese número en la pokedex, ponle uno nuevo";
+		}
+		
+		return s;
+	}
+	
+	@PostMapping(value = "/deletePokemon")
+	public String DeletePokemon(@RequestBody Pokemon query){	
+		String s = new String("");
+		BasicDBObject whereQuery = new BasicDBObject();
+		List<DBObject> all = new ArrayList<DBObject>(); 
+		whereQuery.put("pokedex_number", Integer.parseInt(query.pokedex_number));
+		DBCursor cursor = pokemonCollection.find(whereQuery);
+		all = cursor.toArray();
+		if(all.isEmpty()) { 
+			s = "No hay ningún pokemon con ese número en la pokedex, prueba con otro distinto";
+		}else {
+			pokemonCollection.remove(new BasicDBObject().append("pokedex_number", Integer.parseInt(query.pokedex_number)));
+			s = "Pokemon borrado correctamente";
+		}
+		
+		return s;
+	}
+	
 }
+	
+
