@@ -1,6 +1,7 @@
 package Codipokedex;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.swing.text.Document;
 
@@ -44,6 +45,9 @@ public class PokedexController {
 		}
 		if(query.is_legendary != "") {
 			whereQuery.put("is_legendary", Integer.parseInt(query.is_legendary));
+		}
+		if(query.name != "") {
+			whereQuery.put("name", Pattern.compile("^" + query.name));
 		}
 			
 		

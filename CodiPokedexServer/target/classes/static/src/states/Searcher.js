@@ -205,7 +205,7 @@ CodiPokedex.Searcher = {
 		}
 
 		var query = {
-			//name: document.getElementById("Busqueda").value,
+			name: document.getElementById("Busqueda").value,
 			generation: document.getElementById("generaciones").value,
 			orden : ordenP,
 			is_legendary : document.getElementById("is_Legendary").value,
