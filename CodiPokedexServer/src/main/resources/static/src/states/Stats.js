@@ -356,11 +356,11 @@ CodiPokedex.Stats = {
         }
 
         if(pokemonSelected.type1 == "dark" ||  pokemonSelected.type2 == "dark"){
-            sprites.push(this.game.make.sprite(0, 0, 'bugIcon'));
+            sprites.push(this.game.make.sprite(0, 0, 'darkIcon'));
         }
 
         if(pokemonSelected.type1 == "dragon" ||  pokemonSelected.type2 == "dragon"){
-            sprites.push(this.game.make.sprite(0, 0, 'bugIcon'));
+            sprites.push(this.game.make.sprite(0, 0, 'dragonIcon'));
         }
 
         if(pokemonSelected.type1 == "electric" ||  pokemonSelected.type2 == "electric"){
