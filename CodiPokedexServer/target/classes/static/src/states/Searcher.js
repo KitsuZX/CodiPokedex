@@ -37,8 +37,8 @@ CodiPokedex.Searcher = {
 		this.rectangles = [];
 		this.indexes = [];
 		this.names = [];
-		/*Crea los rectángulos
-		this.rectangles = [];
+		//Crea los rectángulos
+		/*this.rectangles = [];
 
 		var initX = 400;
 		var initY = 50;	
@@ -51,7 +51,8 @@ CodiPokedex.Searcher = {
 		var xOffset = 75;
 		var yOffset = 75;
 
-		
+		var X = initX;
+		var Y = initY;
 
 		for (var i = 0; i < numPokemons; i++) {
 			var x = X;
@@ -63,8 +64,8 @@ CodiPokedex.Searcher = {
 			} else {
 				X += buttonWidth + xOffset;
 			}
-		}*/
-
+		}
+		*/
 		//Aumenta los bordes del mundo para que quepan todos los rectángulos
 		//this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
 
@@ -99,11 +100,7 @@ CodiPokedex.Searcher = {
 				this.game.camera.y = this.target;
 			}
 		}
-
-		this.textoBusqueda = document.getElementById("Busqueda").value;
-		this.textoTipo = document.getElementById("tipo1").value;
-		this.texto.setText(this.textoBusqueda);
-		this.texto2.setText(this.textoTipo);
+		
 	},
 
 	//#region [rgba(0, 50, 30, 0.2)] Movimiento scroll
@@ -150,7 +147,7 @@ CodiPokedex.Searcher = {
 		this.indexes[i].anchor.set(0.5);
 		this.indexes[i].alpha = 0.6;
 
-		var button = this.game.add.button(x, y, 'button',/*'pokemonImage'+i,*/ showPokemonStats, this, 2, 1, 0);
+		var button = this.game.add.button(x, y, /*'button'*/'pokemonImage'+(pokemon[i].pokedex_number-1), showPokemonStats, this, 2, 1, 0);
 		button.index = pokemon[i].pokedex_number;
 		button.width = w;
 		button.height = h;

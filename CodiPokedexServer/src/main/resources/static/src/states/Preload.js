@@ -2,7 +2,7 @@ var CodiPokedex = CodiPokedex || {};
 CodiPokedex.Preload = function(){};
 
 var pokemon;
-var numPokemons = 10;
+var numPokemons = 721;
 
 CodiPokedex.Preload = {
 	//Loading the game assets
