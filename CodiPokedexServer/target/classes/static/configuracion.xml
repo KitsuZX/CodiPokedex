@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tamaño_ventana>
+        <ancho>1920</ancho>
+        <alto>1080</alto>
+    </tamaño_ventana>
+    <color_fondo>Verde</color_fondo>
+    <creadores>Pablo Martinez Domingo, Pablo Velilla Alvarez, Daniel Davila Perez</creadores>
+    <numero_usuario>0000000000000000054</numero_usuario>
+</config>

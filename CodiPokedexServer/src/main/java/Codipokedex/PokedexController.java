@@ -54,21 +54,9 @@ public class PokedexController {
 		DBCursor cursor = pokemonCollection.find(whereQuery);
 		cursor.sort(new BasicDBObject("pokedex_number", Integer.parseInt(query.orden)));
 		all = cursor.toArray();
-		//if(Integer.parseInt(query.orden) == -1) {
-			  //Collections.reverse(all);
-		//}
 		
 		cursor.close();	
-		/*try {
-		    while(cursor.hasNext()) {
-		    	DBObject c = cursor.next();
-				//String s = c.toString();
-				all.add((c));
-		    }
-		} finally {
-		    cursor.close();
-		}*/
-		
+
 	    return all;
 	}
 	
