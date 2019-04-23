@@ -3,8 +3,8 @@ CodiPokedex.Stats = function () { };
 
 CodiPokedex.Stats = {
 
-    preload: function(){
-        this.load.image('pokemonImage', 'assets/pokemonImages/' + (pokemonSelected.pokedex_number)+ '.png');
+    preload: function () {
+        this.load.image('pokemonImage', 'assets/pokemonImages/' + (pokemonSelected.pokedex_number) + '.png');
     },
 
     create: function () {
@@ -48,7 +48,7 @@ CodiPokedex.Stats = {
         //Types
         //Type icons   
         var typeText = this.game.add.text(this.game.width / 2 - 175, pokemonName.y + 100, 'Tipo: ', { font: 'bold 40px Arial', fill: '#fff' });
-        var icons = this.getType();       
+        var icons = this.getType();
         var type1Icon = this.game.add.existing(icons[0]);
         type1Icon.x = typeText.x + 175;
         type1Icon.y = typeText.y + 30;
@@ -61,8 +61,8 @@ CodiPokedex.Stats = {
             type2Icon.y = type1Icon.y;
             type2Icon.anchor.setTo(0.5);
             type2Icon.scale.setTo(0.4);
-    
-        }       
+
+        }
 
         button.onInputOver.add(overButton, this);
         button.onInputOut.add(outButton, this);
@@ -95,7 +95,7 @@ CodiPokedex.Stats = {
         var distanceX = 210;
         var distanceY = 70;
 
-        var healthText = this.game.add.text(windowWidth / 2 + 350, 60, 'HP', { font: 'bold 35px Arial', fill: '#fff' })       
+        var healthText = this.game.add.text(windowWidth / 2 + 350, 60, 'HP', { font: 'bold 35px Arial', fill: '#fff' })
         var attackText = this.game.add.text(healthText.x, healthText.y + distanceY, 'Ataque', { font: 'bold 35px Arial', fill: '#fff' })
         var defenseText = this.game.add.text(attackText.x, attackText.y + distanceY, 'Defensa', { font: 'bold 35px Arial', fill: '#fff' })
         var spAttackText = this.game.add.text(defenseText.x, defenseText.y + distanceY, 'Atq Esp', { font: 'bold 35px Arial', fill: '#fff' })
@@ -109,10 +109,10 @@ CodiPokedex.Stats = {
             var bar = this.game.add.sprite(healthText.x + 200, y, 'progressBar');
             bars.push(bar);
             bar.height = 40;
-            y+=distanceY;
-            
+            y += distanceY;
+
         }
-        
+
         this.game.add.text(healthText.x + distanceX, healthText.y, pokemonSelected.hp, { font: '35px Arial', fill: '#fff' });
         bars[0].width = this.calculateBarWidth(bars[0].width, pokemonSelected.hp);
         this.game.add.text(attackText.x + distanceX, attackText.y, pokemonSelected.attack, { font: '35px Arial', fill: '#fff' });
@@ -127,43 +127,43 @@ CodiPokedex.Stats = {
         bars[5].width = this.calculateBarWidth(bars[5].width, pokemonSelected.speed);
 
         //Debilidades
-        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 100, 'Débil contra', { font: 'bold 50px Arial', fill: '#fff' })       
+        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 100, 'Débil contra', { font: 'bold 50px Arial', fill: '#fff' })
         debText.anchor.setTo(0.5);
 
         var sprites = this.getFortalezas();
         var X = debText.x - 280;
-        var xOff = 100;        
+        var xOff = 100;
         var Y = debText.y + 50;
 
         for (let i = 0; i < sprites.length; i++) {
-            var sprite = this.game.add.existing(sprites[i]);    
+            var sprite = this.game.add.existing(sprites[i]);
             sprite.scale.setTo(0.3);
             sprite.x = X;
-            sprite.y = Y;    
-            X += xOff;                    
+            sprite.y = Y;
+            X += xOff;
         }
 
-        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 300, 'Fuerte contra', { font: 'bold 50px Arial', fill: '#fff' })       
+        var debText = this.game.add.text(windowWidth * (3 / 4) + 120, windowHeight / 2 + 300, 'Fuerte contra', { font: 'bold 50px Arial', fill: '#fff' })
         debText.anchor.setTo(0.5);
 
         var spritesF = this.getDebilidades();
         var X = debText.x - 280;
-        var xOff = 100;        
+        var xOff = 100;
         var Y = debText.y + 50;
 
         for (let i = 0; i < spritesF.length; i++) {
-            var sprite = this.game.add.existing(spritesF[i]);    
-            sprite.scale.setTo(0.3);     
+            var sprite = this.game.add.existing(spritesF[i]);
+            sprite.scale.setTo(0.3);
             sprite.x = X;
-            sprite.y = Y;    
-            X += xOff;                    
+            sprite.y = Y;
+            X += xOff;
         }
     },
 
     hideHTML() {
         var x = document.getElementById("Busqueda");
         x.style.display = "none";
-       
+
         x = document.getElementById("tipo1");
         x.style.display = "none";
 
@@ -175,7 +175,7 @@ CodiPokedex.Stats = {
         document.getElementById("filter").style.display = "none";
 
         document.getElementById("crear").style.display = "none";
-		document.getElementById("borrar").style.display = "none";
+        document.getElementById("borrar").style.display = "none";
         document.getElementById("PokemonName").style.display = "none";
         document.getElementById("PokemonPokedexNumber").style.display = "none";
         document.getElementById("PokemonType1").style.display = "none";
@@ -185,241 +185,241 @@ CodiPokedex.Stats = {
         document.getElementById("PokemonCreate").style.display = "none";
 
         document.getElementById("DeletePokedexNumber").style.display = "none";
-		document.getElementById("PokemonDelete").style.display = "none";
+        document.getElementById("PokemonDelete").style.display = "none";
     },
 
-    calculateBarWidth(originalWidth, value){
+    calculateBarWidth(originalWidth, value) {
         return value * originalWidth / 160;
     },
 
-    getDebilidades(){
+    getDebilidades() {
         var sprites = [];
 
-        if(pokemonSelected.against_bug == 0.5){
+        if (pokemonSelected.against_bug == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'bugIcon'));
         }
 
-        if(pokemonSelected.against_dark == 0.5){
+        if (pokemonSelected.against_dark == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'darkIcon'));
         }
 
-        if(pokemonSelected.against_dragon == 0.5){
+        if (pokemonSelected.against_dragon == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'dragonIcon'));
         }
 
-        if(pokemonSelected.against_electric == 0.5){
+        if (pokemonSelected.against_electric == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'electricIcon'));
         }
 
-        if(pokemonSelected.against_fairy == 0.5){
+        if (pokemonSelected.against_fairy == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'flyingIcon'));
         }
 
-        if(pokemonSelected.against_fight == 0.5){
+        if (pokemonSelected.against_fight == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'fuegoIcon'));
         }
 
-        if(pokemonSelected.against_fire == 0.5){
+        if (pokemonSelected.against_fire == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'ghostIcon'));
         }
 
-        if(pokemonSelected.against_flying == 0.5){
+        if (pokemonSelected.against_flying == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'grassIcon'));
         }
 
-        if(pokemonSelected.against_ghost == 0.5){
+        if (pokemonSelected.against_ghost == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'groundIcon'));
         }
 
-        if(pokemonSelected.against_grass == 0.5){
+        if (pokemonSelected.against_grass == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'fairyIcon'));
         }
 
-        if(pokemonSelected.against_ground == 0.5){
+        if (pokemonSelected.against_ground == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'iceIcon'));
         }
 
-        if(pokemonSelected.against_ice == 0.5){
+        if (pokemonSelected.against_ice == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'luchaIcon'));
         }
 
-        if(pokemonSelected.against_normal == 0.5){
+        if (pokemonSelected.against_normal == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'normalIcon'));
         }
-        
-        if(pokemonSelected.against_poison == 0.5){
+
+        if (pokemonSelected.against_poison == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'posionIcon'));
         }
 
-        if(pokemonSelected.against_psychic == 0.5){
+        if (pokemonSelected.against_psychic == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'psychicIcon'));
         }
 
-        if(pokemonSelected.against_rock == 0.5){
+        if (pokemonSelected.against_rock == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'rockIcon'));
         }
 
-        if(pokemonSelected.against_steel == 0.5){
+        if (pokemonSelected.against_steel == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'steelIcon'));
         }
 
-        if(pokemonSelected.against_water == 0.5){
+        if (pokemonSelected.against_water == 0.5) {
             sprites.push(this.game.make.sprite(0, 0, 'waterIcon'));
         }
 
         return sprites;
     },
 
-    getFortalezas(){
+    getFortalezas() {
         var sprites = [];
 
-        if(pokemonSelected.against_bug == 2){
+        if (pokemonSelected.against_bug == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'bugIcon'));
         }
 
-        if(pokemonSelected.against_dark == 2){
+        if (pokemonSelected.against_dark == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'darkIcon'));
         }
 
-        if(pokemonSelected.against_dragon == 2){
+        if (pokemonSelected.against_dragon == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'dragonIcon'));
         }
 
-        if(pokemonSelected.against_electric == 2){
+        if (pokemonSelected.against_electric == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'electricIcon'));
         }
 
-        if(pokemonSelected.against_fairy == 2){
+        if (pokemonSelected.against_fairy == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'flyingIcon'));
         }
 
-        if(pokemonSelected.against_fight == 2){
+        if (pokemonSelected.against_fight == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'fuegoIcon'));
         }
 
-        if(pokemonSelected.against_fire == 2){
+        if (pokemonSelected.against_fire == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'ghostIcon'));
         }
 
-        if(pokemonSelected.against_flying == 2){
+        if (pokemonSelected.against_flying == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'grassIcon'));
         }
 
-        if(pokemonSelected.against_ghost == 2){
+        if (pokemonSelected.against_ghost == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'groundIcon'));
         }
 
-        if(pokemonSelected.against_grass == 2){
+        if (pokemonSelected.against_grass == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'fairyIcon'));
         }
 
-        if(pokemonSelected.against_ground == 2){
+        if (pokemonSelected.against_ground == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'iceIcon'));
         }
 
-        if(pokemonSelected.against_ice == 2){
+        if (pokemonSelected.against_ice == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'luchaIcon'));
         }
 
-        if(pokemonSelected.against_normal == 2){
+        if (pokemonSelected.against_normal == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'normalIcon'));
         }
-        
-        if(pokemonSelected.against_poison == 2){
+
+        if (pokemonSelected.against_poison == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'posionIcon'));
         }
 
-        if(pokemonSelected.against_psychic == 2){
+        if (pokemonSelected.against_psychic == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'psychicIcon'));
         }
 
-        if(pokemonSelected.against_rock == 2){
+        if (pokemonSelected.against_rock == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'rockIcon'));
         }
 
-        if(pokemonSelected.against_steel == 2){
+        if (pokemonSelected.against_steel == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'steelIcon'));
         }
 
-        if(pokemonSelected.against_water == 2){
+        if (pokemonSelected.against_water == 2) {
             sprites.push(this.game.make.sprite(0, 0, 'waterIcon'));
         }
 
         return sprites;
     },
 
-    getType(){
+    getType() {
         var sprites = [];
 
-        if(pokemonSelected.type1 == "bug" ||  pokemonSelected.type2 == "bug"){
+        if (pokemonSelected.type1 == "bug" || pokemonSelected.type2 == "bug") {
             sprites.push(this.game.make.sprite(0, 0, 'bugIcon'));
         }
 
-        if(pokemonSelected.type1 == "dark" ||  pokemonSelected.type2 == "dark"){
+        if (pokemonSelected.type1 == "dark" || pokemonSelected.type2 == "dark") {
             sprites.push(this.game.make.sprite(0, 0, 'darkIcon'));
         }
 
-        if(pokemonSelected.type1 == "dragon" ||  pokemonSelected.type2 == "dragon"){
+        if (pokemonSelected.type1 == "dragon" || pokemonSelected.type2 == "dragon") {
             sprites.push(this.game.make.sprite(0, 0, 'dragonIcon'));
         }
 
-        if(pokemonSelected.type1 == "electric" ||  pokemonSelected.type2 == "electric"){
+        if (pokemonSelected.type1 == "electric" || pokemonSelected.type2 == "electric") {
             sprites.push(this.game.make.sprite(0, 0, 'electricIcon'));
         }
 
-        if(pokemonSelected.type1 == "flying" ||  pokemonSelected.type2 == "flying"){
+        if (pokemonSelected.type1 == "flying" || pokemonSelected.type2 == "flying") {
             sprites.push(this.game.make.sprite(0, 0, 'flyingIcon'));
         }
 
-        if(pokemonSelected.type1 == "fire" ||  pokemonSelected.type2 == "fire"){
+        if (pokemonSelected.type1 == "fire" || pokemonSelected.type2 == "fire") {
             sprites.push(this.game.make.sprite(0, 0, 'fuegoIcon'));
         }
 
-        if(pokemonSelected.type1 == "ghost" ||  pokemonSelected.type2 == "ghost"){
+        if (pokemonSelected.type1 == "ghost" || pokemonSelected.type2 == "ghost") {
             sprites.push(this.game.make.sprite(0, 0, 'ghostIcon'));
         }
 
-        if(pokemonSelected.type1 == "grass" ||  pokemonSelected.type2 == "grass"){
+        if (pokemonSelected.type1 == "grass" || pokemonSelected.type2 == "grass") {
             sprites.push(this.game.make.sprite(0, 0, 'grassIcon'));
         }
 
-        if(pokemonSelected.type1 == "ground" ||  pokemonSelected.type2 == "ground"){
+        if (pokemonSelected.type1 == "ground" || pokemonSelected.type2 == "ground") {
             sprites.push(this.game.make.sprite(0, 0, 'groundIcon'));
         }
 
-        if(pokemonSelected.type1 == "fairy" ||  pokemonSelected.type2 == "fairy"){
+        if (pokemonSelected.type1 == "fairy" || pokemonSelected.type2 == "fairy") {
             sprites.push(this.game.make.sprite(0, 0, 'fairyIcon'));
         }
 
-        if(pokemonSelected.type1 == "ice" ||  pokemonSelected.type2 == "ice"){
+        if (pokemonSelected.type1 == "ice" || pokemonSelected.type2 == "ice") {
             sprites.push(this.game.make.sprite(0, 0, 'iceIcon'));
         }
 
-        if(pokemonSelected.type1 == "fighting" ||  pokemonSelected.type2 == "fighting"){
+        if (pokemonSelected.type1 == "fighting" || pokemonSelected.type2 == "fighting") {
             sprites.push(this.game.make.sprite(0, 0, 'luchaIcon'));
         }
 
-        if(pokemonSelected.type1 == "normal" ||  pokemonSelected.type2 == "normal"){
+        if (pokemonSelected.type1 == "normal" || pokemonSelected.type2 == "normal") {
             sprites.push(this.game.make.sprite(0, 0, 'normalIcon'));
         }
-        
-        if(pokemonSelected.type1 == "poison" ||  pokemonSelected.type2 == "poison"){
+
+        if (pokemonSelected.type1 == "poison" || pokemonSelected.type2 == "poison") {
             sprites.push(this.game.make.sprite(0, 0, 'posionIcon'));
         }
 
-        if(pokemonSelected.type1 == "psychic" ||  pokemonSelected.type2 == "psychic"){
+        if (pokemonSelected.type1 == "psychic" || pokemonSelected.type2 == "psychic") {
             sprites.push(this.game.make.sprite(0, 0, 'psychicIcon'));
         }
 
-        if(pokemonSelected.type1 == "rock" ||  pokemonSelected.type2 == "rock"){
+        if (pokemonSelected.type1 == "rock" || pokemonSelected.type2 == "rock") {
             sprites.push(this.game.make.sprite(0, 0, 'rockIcon'));
         }
 
-        if(pokemonSelected.type1 == "steel" ||  pokemonSelected.type2 == "steel"){
+        if (pokemonSelected.type1 == "steel" || pokemonSelected.type2 == "steel") {
             sprites.push(this.game.make.sprite(0, 0, 'steelIcon'));
         }
 
-        if(pokemonSelected.type1 == "water" ||  pokemonSelected.type2 == "water"){
+        if (pokemonSelected.type1 == "water" || pokemonSelected.type2 == "water") {
             sprites.push(this.game.make.sprite(0, 0, 'waterIcon'));
         }
 
