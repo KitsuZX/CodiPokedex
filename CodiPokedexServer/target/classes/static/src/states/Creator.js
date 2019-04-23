@@ -3,8 +3,8 @@ CodiPokedex.Creator = function () { };
 
 
 CodiPokedex.Creator = {
-    
-    preload: function(){
+
+    preload: function () {
 
     },
 
@@ -12,7 +12,7 @@ CodiPokedex.Creator = {
         this.showHTML();
         this.hideHTML();
 
-        var background = this.game.add.sprite(0, 0, 'statsBackground');
+        var background = this.game.add.sprite(0, 0, 'createPokemonBackground');
         background.width = windowWidth;
         background.height = windowHeight;
         background.fixedToCamera = true;
@@ -27,8 +27,8 @@ CodiPokedex.Creator = {
 
     },
 
-    showHTML: function(){
-        
+    showHTML: function () {
+
         document.getElementById("PokemonName").style.display = "block";
         document.getElementById("PokemonPokedexNumber").style.display = "block";
         document.getElementById("PokemonType1").style.display = "block";
@@ -42,7 +42,7 @@ CodiPokedex.Creator = {
     hideHTML() {
         var x = document.getElementById("Busqueda");
         x.style.display = "none";
-       
+
         x = document.getElementById("tipo1");
         x.style.display = "none";
 
@@ -54,46 +54,46 @@ CodiPokedex.Creator = {
         document.getElementById("filter").style.display = "none";
         document.getElementById("crear").style.display = "none";
         document.getElementById("borrar").style.display = "none";
-        
+
         document.getElementById("DeletePokedexNumber").style.display = "none";
-		document.getElementById("PokemonDelete").style.display = "none";
+        document.getElementById("PokemonDelete").style.display = "none";
     },
 
-    createPokemon: function (){
+    createPokemon: function () {
 
-		var query = {
+        var query = {
             name: document.getElementById("PokemonName").value,
             pokedex_number: document.getElementById("PokemonPokedexNumber").value,
-			generation: 0,
-			orden : 0,
-            is_legendary : document.getElementById("Pokemonis_Legendary").value,
+            generation: 0,
+            orden: 0,
+            is_legendary: document.getElementById("Pokemonis_Legendary").value,
             abilities: document.getElementById("PokemonAbilities").value,
-			type1: document.getElementById("PokemonType1").value,
-			type2: document.getElementById("PokemonType2").value
-		}
-		query = JSON.stringify(query);
+            type1: document.getElementById("PokemonType1").value,
+            type2: document.getElementById("PokemonType2").value
+        }
+        query = JSON.stringify(query);
 
-		this.askServer(query);
-		
+        this.askServer(query);
+
     },
-    
-    askServer: function(query){
-		$.ajax("/addPokemon", 
-				{
-					method: "POST",
-					data: query,
-					processData: false,					
-					
-					headers:{
-						"Content-Type": "application/json"
-					},
 
-					success: function(data){        
-                        console.log(data);
-					}
-				}
-			); 
-	}
+    askServer: function (query) {
+        $.ajax("/addPokemon",
+            {
+                method: "POST",
+                data: query,
+                processData: false,
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                success: function (data) {
+                    console.log(data);
+                }
+            }
+        );
+    }
 
 
 }

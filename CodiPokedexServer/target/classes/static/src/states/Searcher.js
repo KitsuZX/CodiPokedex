@@ -8,12 +8,12 @@ var cameraPosition = 0;
 
 //Setting game configuration and loading the assets for the loading screen
 CodiPokedex.Searcher = {
-	preload(){
+	preload() {
 
 	},
-	
+
 	create() {
-		this.game.stage.backgroundColor = '#fff';	
+		this.game.stage.backgroundColor = '#fff';
 
 		var background = this.game.add.sprite(0, 0, 'statsBackground');
 		background.width = windowWidth;
@@ -32,42 +32,16 @@ CodiPokedex.Searcher = {
 		text.anchor.setTo(0.5);
 		text.fixedToCamera = true;
 
+		var textAsc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 30), 560, 'Ascendente', { font: 'bold 20px Arial', fill: '#fff' });
+		var textDesc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 30), 592, 'Descendente', { font: 'bold 20px Arial', fill: '#fff' });
+		textAsc.fixedToCamera = true;
+		textDesc.fixedToCamera = true;
+
 		this.game.camera.y = cameraPosition;
 
 		this.rectangles = [];
 		this.indexes = [];
 		this.names = [];
-		//Crea los rectángulos
-		/*this.rectangles = [];
-
-		var initX = 400;
-		var initY = 50;	
-
-		var pokemonsPerRow = 5;
-
-		var buttonWidth = 225;
-		var buttonHeight = 225;
-
-		var xOffset = 75;
-		var yOffset = 75;
-
-		var X = initX;
-		var Y = initY;
-
-		for (var i = 0; i < numPokemons; i++) {
-			var x = X;
-			var y = Y;
-			this.rectangles.push(this.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
-			if ((i + 1) % pokemonsPerRow == 0) {
-				Y += buttonHeight + yOffset;
-				X = initX;
-			} else {
-				X += buttonWidth + xOffset;
-			}
-		}
-		*/
-		//Aumenta los bordes del mundo para que quepan todos los rectángulos
-		//this.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
 
 		//Parametros del scroll. No tocar.
 		this.dragging = false;
@@ -80,10 +54,10 @@ CodiPokedex.Searcher = {
 
 		//Crear cuadros para insertar texto
 		this.texto = this.game.add.text(50, 50, "", { font: 'bold 100px Arial', fill: '#fff' });
-		this.texto2 = this.game.add.text(200, 200, "", { font: 'bold 100px Arial', fill: '#fff' }); 
+		this.texto2 = this.game.add.text(200, 200, "", { font: 'bold 100px Arial', fill: '#fff' });
 
 		this.getPokemon();
-		
+
 	},
 
 	update: function () {
@@ -100,7 +74,7 @@ CodiPokedex.Searcher = {
 				this.game.camera.y = this.target;
 			}
 		}
-		
+
 	},
 
 	//#region [rgba(0, 50, 30, 0.2)] Movimiento scroll
@@ -143,11 +117,11 @@ CodiPokedex.Searcher = {
 
 	createPokemonButton: function (x, y, w, h, i) {
 
-		this.indexes[i] = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100,'#'+(pokemon[i].pokedex_number), { font: 'bold 75px Arial', fill: '#fff' });
+		this.indexes[i] = this.game.add.text((x + (x + w)) * 0.5 - 75, (y + (y + h)) * 0.5 - 100, '#' + (pokemon[i].pokedex_number), { font: 'bold 75px Arial', fill: '#fff' });
 		this.indexes[i].anchor.set(0.5);
 		this.indexes[i].alpha = 0.6;
 
-		var button = this.game.add.button(x, y, /*'button'*/'pokemonImage'+(pokemon[i].pokedex_number-1), showPokemonStats, this, 2, 1, 0);
+		var button = this.game.add.button(x, y, /*'button'*/'pokemonImage' + (pokemon[i].pokedex_number - 1), showPokemonStats, this, 2, 1, 0);
 		button.index = pokemon[i].pokedex_number;
 		button.width = w;
 		button.height = h;
@@ -157,9 +131,9 @@ CodiPokedex.Searcher = {
 		button.onInputUp.add(upButton, this);
 
 		//var name = pokemon[i].name;		
-		this.names[i] = this.game.add.text((x + (x + w)) * 0.5, y + h + 25,pokemon[i].name, { font: 'bold 40px Arial', fill: '#fff' });
+		this.names[i] = this.game.add.text((x + (x + w)) * 0.5, y + h + 25, pokemon[i].name, { font: 'bold 40px Arial', fill: '#fff' });
 		this.names[i].anchor.set(0.5);
-		
+
 		return button;
 	},
 
@@ -171,19 +145,19 @@ CodiPokedex.Searcher = {
 		x.style.display = "block";
 
 		document.getElementById("ordenAscendente").style.display = "block";
-        document.getElementById("ordenDescendente").style.display = "block";
-        document.getElementById("generaciones").style.display = "block";
-        document.getElementById("is_Legendary").style.display = "block";
-        document.getElementById("tipo2").style.display = "block";
+		document.getElementById("ordenDescendente").style.display = "block";
+		document.getElementById("generaciones").style.display = "block";
+		document.getElementById("is_Legendary").style.display = "block";
+		document.getElementById("tipo2").style.display = "block";
 		document.getElementById("filter").style.display = "block";
 		document.getElementById("crear").style.display = "block";
 		document.getElementById("borrar").style.display = "block";
-		
-		
+
+
 		document.getElementById("PokemonName").style.display = "none";
-        document.getElementById("PokemonPokedexNumber").style.display = "none";
-        document.getElementById("PokemonType1").style.display = "none";
-        document.getElementById("PokemonType2").style.display = "none";
+		document.getElementById("PokemonPokedexNumber").style.display = "none";
+		document.getElementById("PokemonType1").style.display = "none";
+		document.getElementById("PokemonType2").style.display = "none";
 		document.getElementById("PokemonAbilities").style.display = "none";
 		document.getElementById("Pokemonis_Legendary").style.display = "none";
 		document.getElementById("PokemonCreate").style.display = "none";
@@ -195,89 +169,89 @@ CodiPokedex.Searcher = {
 	},
 
 	//#region [rgba(252, 522, 122, 0.1)] Server conexions/filters
-	getPokemon: function (){
+	getPokemon: function () {
 
-		var ordenP= 0;
-		if(document.getElementById("ordenAscendente").checked){
+		var ordenP = 0;
+		if (document.getElementById("ordenAscendente").checked) {
 			ordenP = document.getElementById("ordenAscendente").value;
-		}else{
+		} else {
 			ordenP = document.getElementById("ordenDescendente").value;
 		}
 
 		var query = {
 			name: document.getElementById("Busqueda").value,
 			generation: document.getElementById("generaciones").value,
-			orden : ordenP,
-			is_legendary : document.getElementById("is_Legendary").value,
+			orden: ordenP,
+			is_legendary: document.getElementById("is_Legendary").value,
 			type1: document.getElementById("tipo1").value,
 			type2: document.getElementById("tipo2").value
 		}
 		query = JSON.stringify(query);
 
 		this.askServer(query);
-		
+
 	},
 
-	askServer: function(query){
-		$.ajax("/getPokemon", 
-				{
-					method: "POST",
-					data: query,
-					processData: false,					
-					
-					headers:{
-						"Content-Type": "application/json"
-					},
+	askServer: function (query) {
+		$.ajax("/getPokemon",
+			{
+				method: "POST",
+				data: query,
+				processData: false,
 
-					success: function(data){        
-						
-						/*for(i = 0; i < data.length;i++){
-							console.log(data[i].name);
-						}*/
+				headers: {
+					"Content-Type": "application/json"
+				},
 
-						for(i = 0; i < CodiPokedex.Searcher.rectangles.length;i++){
-							CodiPokedex.Searcher.rectangles[i].destroy();
-							CodiPokedex.Searcher.names[i].destroy();
-							CodiPokedex.Searcher.indexes[i].destroy();
-						}
+				success: function (data) {
 
-						pokemon = data;
-						numPokemons = data.length;
+					/*for(i = 0; i < data.length;i++){
+						console.log(data[i].name);
+					}*/
 
-						//Crea los rectángulos
-						CodiPokedex.Searcher.rectangles = [];
-
-						var initX = 400;
-						var initY = 50;	
-
-						var pokemonsPerRow = 5;
-
-						var buttonWidth = 225;
-						var buttonHeight = 225;
-
-						var xOffset = 75;
-						var yOffset = 75;
-
-						var X = initX;
-						var Y = initY;
-
-						for (var i = 0; i < numPokemons; i++) {
-							var x = X;
-							var y = Y;
-							CodiPokedex.Searcher.rectangles.push(CodiPokedex.Searcher.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
-							if ((i + 1) % pokemonsPerRow == 0) {
-								Y += buttonHeight + yOffset;
-								X = initX;
-							} else {
-								X += buttonWidth + xOffset;
-							}
-						}
-
-						CodiPokedex.Searcher.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
-
+					for (i = 0; i < CodiPokedex.Searcher.rectangles.length; i++) {
+						CodiPokedex.Searcher.rectangles[i].destroy();
+						CodiPokedex.Searcher.names[i].destroy();
+						CodiPokedex.Searcher.indexes[i].destroy();
 					}
+
+					pokemon = data;
+					numPokemons = data.length;
+
+					//Crea los rectángulos
+					CodiPokedex.Searcher.rectangles = [];
+
+					var initX = 400;
+					var initY = 50;
+
+					var pokemonsPerRow = 5;
+
+					var buttonWidth = 225;
+					var buttonHeight = 225;
+
+					var xOffset = 75;
+					var yOffset = 75;
+
+					var X = initX;
+					var Y = initY;
+
+					for (var i = 0; i < numPokemons; i++) {
+						var x = X;
+						var y = Y;
+						CodiPokedex.Searcher.rectangles.push(CodiPokedex.Searcher.createPokemonButton(x, y, buttonWidth, buttonHeight, i));
+						if ((i + 1) % pokemonsPerRow == 0) {
+							Y += buttonHeight + yOffset;
+							X = initX;
+						} else {
+							X += buttonWidth + xOffset;
+						}
+					}
+
+					CodiPokedex.Searcher.game.world.setBounds(0, 0, initX + (buttonWidth + xOffset) * pokemonsPerRow, initY + (buttonHeight + yOffset) * (Math.ceil(numPokemons / pokemonsPerRow)));
+
 				}
-			); 
+			}
+		);
 	}
 
 }
@@ -295,9 +269,9 @@ function upButton(e) {
 	cameraPosition = CodiPokedex.Searcher.game.camera.y;
 }
 
-function getPokemonSelected(e){
-	for(i = 0;i < pokemon.length;i++){
-		if(pokemon[i].pokedex_number == e.index){
+function getPokemonSelected(e) {
+	for (i = 0; i < pokemon.length; i++) {
+		if (pokemon[i].pokedex_number == e.index) {
 			return pokemon[i];
 		}
 	}

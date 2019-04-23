@@ -1,17 +1,18 @@
 var CodiPokedex = CodiPokedex || {};
-CodiPokedex.Preload = function(){};
+CodiPokedex.Preload = function () { };
 
 var pokemon;
 var numPokemons = 721;
 
 CodiPokedex.Preload = {
 	//Loading the game assets
-	preload: function(){
-		//Show logo in loading screen
-		this.logo = this.add.sprite(0, 0, 'logo');
-		this.logo.width = this.game.width;
-		this.logo.height = this.game.height;
-		this.preloadBar = this.add.sprite(this.game.world.centerX - 130, this.game.world.height - 50 , 'preloadBar');	
+	preload: function () {
+		//Show loadingScreen in loading screen
+		var rand = Math.floor(Math.random() * 5) + 1;
+		this.loadingScreen = this.add.sprite(0, 0, 'loadingScreen' + rand);
+		this.loadingScreen.width = this.game.width;
+		this.loadingScreen.height = this.game.height;
+		this.preloadBar = this.add.sprite(this.game.world.centerX - 130, this.game.world.height - 50, 'preloadBar');
 		this.load.setPreloadSprite(this.preloadBar);
 
 		//Load game assets	
@@ -46,18 +47,22 @@ CodiPokedex.Preload = {
 		this.load.image('steelIcon', 'assets/images/Icon/steelIcon.png')
 		this.load.image('waterIcon', 'assets/images/Icon/waterIcon.png')
 
+		this.load.image('deletePokemonBackground', 'assets/images/deletePokemon.png')
+		this.load.image('createPokemonBackground', 'assets/images/createPokemon.png')
+
+
 		this.game.load.json('pokemon', 'assets/data/pokemon.json');
 
 		//Load pokemons
 		for (let i = 0; i < numPokemons; i++) {
-			this.load.image('pokemonImage'+i, 'assets/pokemonImages/' + (i + 1)+ '.png');			
+			this.load.image('pokemonImage' + i, 'assets/pokemonImages/' + (i + 1) + '.png');
 		}
 
 	},
 
-	create: function(){
-		//this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
-		//pokemon = this.pokemon;
+	create: function () {
+		/*this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
+		pokemon = this.pokemon;*/
 
 		this.state.start('Searcher');
 	}
