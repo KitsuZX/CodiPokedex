@@ -28,12 +28,12 @@ CodiPokedex.Searcher = {
 		this.leftSide.height = windowHeight;
 		this.leftSide.fixedToCamera = true;
 
-		var text = this.game.add.text((this.leftSide.x + this.leftSide.width / 2), 100, 'Buscador', { font: 'bold 40px Arial', fill: '#fff' });
+		var text = this.game.add.text((this.leftSide.x + this.leftSide.width / 2), 50, 'Buscador', { font: 'bold 40px Arial', fill: '#fff' });
 		text.anchor.setTo(0.5);
 		text.fixedToCamera = true;
 
-		var textAsc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 30), 560, 'Ascendente', { font: 'bold 20px Arial', fill: '#fff' });
-		var textDesc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 30), 592, 'Descendente', { font: 'bold 20px Arial', fill: '#fff' });
+		var textAsc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 50), 575, 'Ascendente', { font: 'bold 20px Arial', fill: '#fff' });
+		var textDesc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2  - 50), 615, 'Descendente', { font: 'bold 20px Arial', fill: '#fff' });
 		textAsc.fixedToCamera = true;
 		textDesc.fixedToCamera = true;
 

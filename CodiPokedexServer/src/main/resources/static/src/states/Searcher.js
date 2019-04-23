@@ -32,8 +32,8 @@ CodiPokedex.Searcher = {
 		text.anchor.setTo(0.5);
 		text.fixedToCamera = true;
 
-		var textAsc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 60), 460, 'Ascendente', { font: 'bold 20px Arial', fill: '#fff' });
-		var textDesc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2  - 60), 492, 'Descendente', { font: 'bold 20px Arial', fill: '#fff' });
+		var textAsc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2 - 50), 575, 'Ascendente', { font: 'bold 20px Arial', fill: '#fff' });
+		var textDesc = this.game.add.text((this.leftSide.x + this.leftSide.width / 2  - 50), 615, 'Descendente', { font: 'bold 20px Arial', fill: '#fff' });
 		textAsc.fixedToCamera = true;
 		textDesc.fixedToCamera = true;
 
