@@ -167,8 +167,9 @@ CodiPokedex.Stats = {
         x = document.getElementById("tipo1");
         x.style.display = "none";
 
-        document.getElementById("ordenAscendente").style.display = "none";
-        document.getElementById("ordenDescendente").style.display = "none";
+        document.getElementById("ordenAscendente").style = "display:none";
+        //$('#asc').parent().hide();
+        document.getElementById("ordenDescendente").style = "display:none";
         document.getElementById("generaciones").style.display = "none";
         document.getElementById("is_Legendary").style.display = "none";
         document.getElementById("tipo2").style.display = "none";

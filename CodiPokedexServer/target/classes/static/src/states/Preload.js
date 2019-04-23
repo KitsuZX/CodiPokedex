@@ -56,8 +56,8 @@ CodiPokedex.Preload = {
 	},
 
 	create: function(){
-		this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
-		pokemon = this.pokemon;
+		//this.pokemon = this.game.cache.getJSON('pokemon').pokemon;
+		//pokemon = this.pokemon;
 
 		this.state.start('Searcher');
 	}
